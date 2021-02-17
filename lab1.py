@@ -67,11 +67,29 @@ print(f"Еталонне значення: y_etalon = {y_etalon}")
 arr = []
 for i in range(len(y)):
     arr.append(y[i] - y_etalon)
-
+print(arr)
 new_arr = []
 for i in range(len(arr)):
     if arr[i] >= 0:
         new_arr.append(arr[i])
-
+print(new_arr)
 res = y_etalon + min(new_arr)
-print(f"res ( Yэт<-- ) = {res}")
+print(f"res ( Yэт<-- ) = {res}\n")
+
+# Додаткове завдання ( --> Y`, де Y` - середнє Y )
+print("-" * 30)
+average_y = round(sum(y)/len(y))
+print(f"Середнє значення: average_y = {average_y}")
+
+# Шукаю у середнє 'знизу'
+arr = []
+for i in range(len(y)):
+    arr.append(y[i] - average_y)
+
+new_arr = []
+for i in range(len(arr)):
+    if arr[i] <= 0:
+        new_arr.append(arr[i])
+
+result = average_y + max(new_arr)
+print(f"result ( --> Y`, де Y` - середнє Y ) = {result}")
