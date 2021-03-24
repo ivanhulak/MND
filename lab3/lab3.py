@@ -1,6 +1,7 @@
 import random
 import math
 
+
 # Лабораторна робота №3
 # Виконав Гулак Іван Володимирович  Варіант - 304
 # Вхідні дані
@@ -194,19 +195,32 @@ print("-" * 80)
 print('\nОцінка значимості коефіцієнтів регресії згідно критерію Стьюдента:')
 d = 0   # кількість значимих коефіцієнтів
 temp = [0, 0, 0, 0]
+N = 4
+Tf = 2.306
+
+znach_kef = []
+ne_znach_kef = []
 for i in range(0, N):
     if t[i] <= Tf:
-        print(f"t[{i}] = {t[i]} <= Tf = {Tf} >= b[{i}] = {b[i]} - не значний коефіцієнт")
+        # print(f"t[{i}] = {t[i]} <= Tf = {Tf} >= b[{i}] = {b[i]} - не значний коефіцієнт")
+        ne_znach_kef.append(b[i])
         temp[i] = 0
     else:
-        print(f"t[{i}] = {t[i]} > Tf = {Tf} >= b[{i}] = {b[i]} - значний коефіцієнт")
+        # print(f"t[{i}] = {t[i]} > Tf = {Tf} >= b[{i}] = {b[i]} - значний коефіцієнт")
+        znach_kef.append(b[i])
         temp[i] = b[i]
         d += 1
+
+# Додаткове завдання:
+# виведіть в консоль які (по номеру) коефіцієнти значимі
+# Я виділяю 217 та 218 стрічки, натискаю правою кнопкою миші та вибираю "Execute selection in Python Console"
+print(f"значний коефіцієнт: {znach_kef}")
+print(f"не значний коефіцієнт: {ne_znach_kef}")
 
 y_2 = []
 for i in range(0, N):
     y_2.append(temp[0] + temp[1] * x1[i] + temp[2] * x2[i] + temp[3] * x3[i])
-print(y_2)
+print(f"y_2: {y_2}")
 
 
 # Критерій Фішера
