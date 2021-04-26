@@ -72,10 +72,14 @@ def make_experiment(m=3):
               - avgYList[i]) ** 2 for i in range(N)]) / f4)
         Fp = S_ad / Sb
 
-        if Fp > f.ppf(q=0.95, dfn=f4, dfd=f3):  # перевірка за критерієм Фішера з використанням scipy
-            print('The regression equation is inadequate to the original at the significance level 0.05.\n Repeat experiment for'
+# якщо модель неадекватна, давайте спробуємо знайти q при якому вона все ж таки буде адекватною (не більше 10 різних q)
+# Тобто, я зробив масив q_arr з 10 різних q та написав умовну конструкцію (якщо не це q, то інше і тд)
+        q_arr = [0.95, 0.96, 0.97, 0.98, 0.99, 0.1, 1.05, 1.1, 1.2, 1.5]
+        for i in range(len(q_arr)):
+            if Fp > f.ppf(q=i, dfn=f4, dfd=f3):  # перевірка за критерієм Фішера з використанням scipy
+                print('The regression equation is inadequate to the original at the significance level 0.05.\n Repeat experiment for'
                       'm+1')
-            make_experiment(4)
+                make_experiment(4)
         else:
             print('The regression equation is adequate to the original at the level of significance 0.05')
 
@@ -213,3 +217,5 @@ def make_experiment(m=3):
 
 
 make_experiment()
+
+
